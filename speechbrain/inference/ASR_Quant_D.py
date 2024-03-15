@@ -165,6 +165,7 @@ class EncoderDecoderASR(Pretrained):
         x=self.transcribe_batch(wavs, wav_lens)
         y=time.time()-start_time
         logger.debug(y)
+        print(y)
         """Runs full transcription - note: no gradients through decoding"""
         return x
 
