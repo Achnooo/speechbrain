@@ -158,14 +158,16 @@ class EncoderDecoderASR(Pretrained):
         
         import logging
         import logging.config
-        logging.config.fileConfig('temp.conf')
+        logging.basicConfig(filename="newfile.log",
+                    format='%(asctime)s %(message)s',
+                    filemode='w')
         # create logger
-        logger = logging.getLogger('simpleExample')
+        logger = logging.getLogger()
+        logger.setLevel(logging.DEBUG)
         start_time = time.time()
         x=self.transcribe_batch(wavs, wav_lens)
         y=time.time()-start_time
         logger.debug(y)
-        print(y)
         """Runs full transcription - note: no gradients through decoding"""
         return x
 
