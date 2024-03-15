@@ -81,6 +81,10 @@ class EncoderDecoderASR(Pretrained):
         predicted_words, predicted_tokens = self.transcribe_batch(
             batch, rel_length
         )
+        import logging
+        name = 'GFG'
+        logging.error('%s raised an error', name)
+
         return predicted_words[0]
 
     def encode_batch(self, wavs, wav_lens):
@@ -156,13 +160,11 @@ class EncoderDecoderASR(Pretrained):
 
     def forward(self, wavs, wav_lens):
         
-        import logging
         start_time = time.time()
         x=self.transcribe_batch(wavs, wav_lens)
         y=time.time()-start_time
-        logging.error('%s raised an error', y)
         """Runs full transcription - note: no gradients through decoding"""
-        return
+        return x
 
 
 class EncoderASR(Pretrained):
