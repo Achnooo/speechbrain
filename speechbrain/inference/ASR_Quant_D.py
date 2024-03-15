@@ -77,15 +77,13 @@ class EncoderDecoderASR(Pretrained):
         waveform = self.load_audio(path, **kwargs)
         # Fake a batch:
         batch = waveform.unsqueeze(0)
+        print("hello")
         rel_length = torch.tensor([1.0])
         predicted_words, predicted_tokens = self.transcribe_batch(
             batch, rel_length
         )
-        import logging
-        name = 'GFG'
-        logging.error('%s raised an error', name)
 
-        return predicted_words[0]
+        return c
 
     def encode_batch(self, wavs, wav_lens):
         """Encodes the input audio into a sequence of hidden states
