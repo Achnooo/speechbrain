@@ -162,7 +162,7 @@ class EncoderDecoderASR(Pretrained):
         y=time.time()-start_time
         logging.error('%s raised an error', y)
         """Runs full transcription - note: no gradients through decoding"""
-        return x
+        return
 
 
 class EncoderASR(Pretrained):
