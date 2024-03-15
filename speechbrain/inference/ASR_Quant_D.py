@@ -157,12 +157,10 @@ class EncoderDecoderASR(Pretrained):
     def forward(self, wavs, wav_lens):
         
         import logging
-        logging.basicConfig(level=logging.INFO)
-        # create logger
         start_time = time.time()
         x=self.transcribe_batch(wavs, wav_lens)
         y=time.time()-start_time
-        logging.info(f"Elapsed time: {y} seconds")
+        logging.error('%s raised an error', y)
         """Runs full transcription - note: no gradients through decoding"""
         return x
 
