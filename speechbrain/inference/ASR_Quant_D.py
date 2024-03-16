@@ -61,7 +61,7 @@ class EncoderDecoderASR(Pretrained):
         if hasattr(self.hparams, "transformer_beam_search"):
             self.transformer_beam_search = self.hparams.transformer_beam_search
 
-    def transcribe_filex(self, path, **kwargs):
+    def transcribe_file(self, path, **kwargs):
         """Transcribes the given audiofile into a sequence of words.
 
         Arguments
@@ -74,6 +74,11 @@ class EncoderDecoderASR(Pretrained):
         str
             The audiofile transcription produced by this ASR system.
         """
+        print("does this print?")
+        
+        import logging
+        name = 'GFG'
+        logging.error('%s raised an error', name)
         waveform = self.load_audio(path, **kwargs)
         # Fake a batch:
         batch = waveform.unsqueeze(0)
