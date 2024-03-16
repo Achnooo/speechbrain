@@ -74,20 +74,14 @@ class EncoderDecoderASR(Pretrained):
         str
             The audiofile transcription produced by this ASR system.
         """        
-        import logging
-        import time
-
+        
         waveform = self.load_audio(path, **kwargs)
         # Fake a batch:
         batch = waveform.unsqueeze(0)
         rel_length = torch.tensor([1.0])
-        x=time.time()
         predicted_words, predicted_tokens = self.transcribe_batch(
             batch, rel_length
         )
-        y=time.time()
-        z=y-x
-        logging.error(z)
         return predicted_words[0]
 
     def encode_batch(self, wavs, wav_lens):
@@ -114,11 +108,15 @@ class EncoderDecoderASR(Pretrained):
         torch.Tensor
             The encoded batch
         """
+        import time
         import logging
-        logging.error("idk")
         wavs = wavs.float()
         wavs, wav_lens = wavs.to(self.device), wav_lens.to(self.device)
+        x=time.time()
         encoder_out = self.mods.encoder(wavs, wav_lens)
+        y=time.time()
+        z=y-x
+        logging.error(z)
         if self.transformer_beam_search:
             encoder_out = self.mods.transformer.encode(encoder_out, wav_lens)
         return encoder_out
@@ -164,11 +162,8 @@ class EncoderDecoderASR(Pretrained):
         return predicted_words, predicted_tokens
 
     def forward(self, wavs, wav_lens):
-        import logging
-        logging.error("hey")
-        x=self.transcribe_batch(wavs, wav_lens)
         """Runs full transcription - note: no gradients through decoding"""
-        return x
+        return self.transcribe_batch(wavs, wav_lens)
 
 
 class EncoderASR(Pretrained):
