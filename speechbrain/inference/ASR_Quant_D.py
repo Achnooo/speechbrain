@@ -61,7 +61,7 @@ class EncoderDecoderASR(Pretrained):
         if hasattr(self.hparams, "transformer_beam_search"):
             self.transformer_beam_search = self.hparams.transformer_beam_search
 
-    def transcribe_file(self, path, **kwargs):
+    def transcribe_filex(self, path, **kwargs):
         """Transcribes the given audiofile into a sequence of words.
 
         Arguments
@@ -77,13 +77,11 @@ class EncoderDecoderASR(Pretrained):
         waveform = self.load_audio(path, **kwargs)
         # Fake a batch:
         batch = waveform.unsqueeze(0)
-        print("hello")
         rel_length = torch.tensor([1.0])
         predicted_words, predicted_tokens = self.transcribe_batch(
             batch, rel_length
         )
-
-        return c
+        return predicted_words[0]
 
     def encode_batch(self, wavs, wav_lens):
         """Encodes the input audio into a sequence of hidden states
