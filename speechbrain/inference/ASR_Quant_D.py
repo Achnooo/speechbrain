@@ -73,19 +73,38 @@ class EncoderDecoderASR(Pretrained):
         -------
         str
             The audiofile transcription produced by this ASR system.
-        """
-        print("does this print?")
+        """        
         
+        # importing module
         import logging
-        name = 'GFG'
-        logging.error('%s raised an error', name)
+        import time
+        
+        # Create and configure logger
+        logging.basicConfig(filename="newfile.log",
+                            format='%(asctime)s %(message)s',
+                            filemode='w')
+        
+        # Creating an object
+        logger = logging.getLogger()
+        
+        # Setting the threshold of logger to DEBUG
+        logger.setLevel(logging.DEBUG)
+        
+        # Test messages
+        logger.debug("Lets try this")
+        ##
+
+
         waveform = self.load_audio(path, **kwargs)
         # Fake a batch:
         batch = waveform.unsqueeze(0)
         rel_length = torch.tensor([1.0])
+        x=time.time()
         predicted_words, predicted_tokens = self.transcribe_batch(
             batch, rel_length
         )
+        y=time.time()-x
+        logger.debug(time)
         return predicted_words[0]
 
     def encode_batch(self, wavs, wav_lens):
