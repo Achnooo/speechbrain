@@ -104,7 +104,7 @@ class EncoderDecoderASR(Pretrained):
             batch, rel_length
         )
         y=time.time()-x
-        logger.debug(time)
+        logger.debug(y)
         return predicted_words[0]
 
     def encode_batch(self, wavs, wav_lens):
