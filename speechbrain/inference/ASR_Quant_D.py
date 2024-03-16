@@ -114,6 +114,7 @@ class EncoderDecoderASR(Pretrained):
         torch.Tensor
             The encoded batch
         """
+        logging.error("idk")
         wavs = wavs.float()
         wavs, wav_lens = wavs.to(self.device), wav_lens.to(self.device)
         encoder_out = self.mods.encoder(wavs, wav_lens)
@@ -162,10 +163,8 @@ class EncoderDecoderASR(Pretrained):
         return predicted_words, predicted_tokens
 
     def forward(self, wavs, wav_lens):
-        
-        start_time = time.time()
+        logging.error("hey")
         x=self.transcribe_batch(wavs, wav_lens)
-        y=time.time()-start_time
         """Runs full transcription - note: no gradients through decoding"""
         return x
 
