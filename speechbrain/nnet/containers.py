@@ -198,7 +198,7 @@ class LengthsCapableSequential(Sequential):
                 print("second")
             if isinstance(x, tuple):
                 x = x[0]
-        z=y-x
+        z=t2-t2
         logging.error(z)
         return x
 
