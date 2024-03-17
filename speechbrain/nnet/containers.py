@@ -184,6 +184,7 @@ class LengthsCapableSequential(Sequential):
         lengths : torch.Tensor
             The relative lengths of each signal in the tensor.
         """
+        print("heyyy")
         for layer, give_lengths in zip(self.values(), self.takes_lengths):
             if give_lengths:
                 x = layer(x, lengths=lengths)
