@@ -3,7 +3,7 @@
 Authors
  * Peter Plantinga 2020
 """
-import quant_funcs
+from speechbrain.inference import quant_funcs
 import torch
 import inspect
 import logging
