@@ -108,16 +108,9 @@ class EncoderDecoderASR(Pretrained):
         torch.Tensor
             The encoded batch
         """
-        import time
-        import logging
         wavs = wavs.float()
         wavs, wav_lens = wavs.to(self.device), wav_lens.to(self.device)
-        t1=time.time()
         encoder_out = self.mods.encoder(wavs, wav_lens)
-        t2=time.time()
-        z=t2-t1
-        print("log 2")
-        logging.error(z)
         if self.transformer_beam_search:
             encoder_out = self.mods.transformer.encode(encoder_out, wav_lens)
         return encoder_out
