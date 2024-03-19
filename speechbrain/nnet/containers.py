@@ -197,7 +197,7 @@ class LengthsCapableSequential(Sequential):
             if isinstance(x, tuple):
                 x = x[0]
         z=t2-t1
-        quant_funcs.speed()
+        quant_funcs.speed(z)
         return x
 
 
