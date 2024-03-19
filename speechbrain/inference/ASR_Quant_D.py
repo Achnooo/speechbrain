@@ -108,6 +108,8 @@ class EncoderDecoderASR(Pretrained):
         torch.Tensor
             The encoded batch
         """
+        import time
+        import logging
         wavs = wavs.float()
         wavs, wav_lens = wavs.to(self.device), wav_lens.to(self.device)
         t1=time.time()
