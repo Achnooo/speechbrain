@@ -3,7 +3,7 @@
 Authors
  * Peter Plantinga 2020
 """
-
+import quant_funcs
 import torch
 import inspect
 import logging
@@ -197,7 +197,7 @@ class LengthsCapableSequential(Sequential):
             if isinstance(x, tuple):
                 x = x[0]
         z=t2-t1
-        logging.error(z)
+        quant_funcs.speed()
         return x
 
 
