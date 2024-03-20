@@ -1,4 +1,5 @@
 from speechbrain.inference import ASR_Quant_D
+import os
 def speed(z):
     print(z)
     with open("numbers.txt","a")as file:
@@ -8,6 +9,7 @@ def speed(z):
     return
 
 def run_speed_measurement(model,n,audio):
+    delete_file_if_exists("numbers.txt")
     for i in range(n):
         print(i)
         #call out boi
@@ -20,4 +22,8 @@ def run_speed_measurement(model,n,audio):
     total_sum = sum(numbers_from_file)
     avg=total_sum/n
     return avg
+
+def delete_file_if_exists(filename):
+    if os.path.exists(filename):
+        os.remove(filename)
     
