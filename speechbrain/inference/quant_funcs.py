@@ -1,17 +1,18 @@
 from speechbrain.inference import ASR_Quant_D
 def speed(z):
     print(z)
-    file.write(str(z)+"\n")
+    with open("numbers.txt","a")as file:
+        file.write(str(z) + "\n")
+    file.close() 
     print("1 loop")
     return
 
 def run_speed_measurement(model,n,audio):
-    with open("numbers.txt","a") as file:
-        for i in range(n):
-            print(i)
-            #call out boi
-            model.transcribe_file(audio)
-    file.close()
+    for i in range(n):
+        print(i)
+        #call out boi
+        model.transcribe_file(audio)
+
     with open("numbers.txt","r")as file:
         lines = file.readlines()
     file.close()
