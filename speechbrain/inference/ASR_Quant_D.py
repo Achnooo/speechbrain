@@ -153,6 +153,8 @@ class EncoderDecoderASR(Pretrained):
                 self.tokenizer.decode_ids(token_seq)
                 for token_seq in predicted_tokens
             ]
+        print(predicted_words)
+        print(predicted_tokens)
         return predicted_words, predicted_tokens
 
     def forward(self, wavs, wav_lens):

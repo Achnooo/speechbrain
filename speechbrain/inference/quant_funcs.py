@@ -12,7 +12,6 @@ def run_speed_measurement(model,n,audio):
     delete_file_if_exists("numbers.txt")
     for i in range(n):
         print(i)
-        #call out boi
         model.transcribe_file(audio)
 
     with open("numbers.txt","r")as file:
@@ -27,3 +26,6 @@ def delete_file_if_exists(filename):
     if os.path.exists(filename):
         os.remove(filename)
     
+def wer(predicted, correct):
+    #calculate WER
+    return
