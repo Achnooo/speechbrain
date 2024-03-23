@@ -28,6 +28,7 @@ def delete_file_if_exists(filename):
     
 def wer(ref, hyp):
     # Tokenize the strings into words
+    hyp = ' '.join(hyp)
     ref_words = ref.split()
     hyp_words = hyp.split()
     
