@@ -29,9 +29,12 @@ def delete_file_if_exists(filename):
 def wer(ref, hyp):
     # Tokenize the strings into words
     hyp = ' '.join(hyp)
+    print(hyp)
     ref_words = ref.split()
     hyp_words = hyp.split()
+    print("ref")
     print(ref_words)
+    print("hyp")
     print(hyp_words)
     # Length of reference text
     N = len(ref_words)
