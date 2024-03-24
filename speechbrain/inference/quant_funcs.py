@@ -19,6 +19,7 @@ def run_speed_measurement(model,n,audio,my_text):
     numbers_from_file = [float(line.strip()) for line in lines]
     total_sum = sum(numbers_from_file)
     avg=total_sum/n
+    print(words)
     print(wer(my_text,words))
     return avg
 
