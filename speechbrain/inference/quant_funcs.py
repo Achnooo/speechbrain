@@ -31,7 +31,8 @@ def wer(ref, hyp):
     hyp = ' '.join(hyp)
     ref_words = ref.split()
     hyp_words = hyp.split()
-    
+    print(ref_words)
+    print(hyp_words)
     # Length of reference text
     N = len(ref_words)
     
