@@ -28,10 +28,11 @@ def delete_file_if_exists(filename):
     
 def wer(ref, hyp):
     # Tokenize the strings into words
-    hyp = hyp[0]
+    print("hyp")
     print(hyp)
+
     ref_words = ref.split()
-    hyp_words = hyp.split()
+    # hyp_words = hyp.split()
     print("ref")
     print(ref_words)
     print("hyp")
