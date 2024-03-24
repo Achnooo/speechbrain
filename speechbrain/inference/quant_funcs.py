@@ -32,7 +32,7 @@ def wer(ref, hyp):
     print(hyp)
 
     ref_words = ref.split()
-    # hyp_words = hyp.split()
+    hyp_words = hyp.split()
     print("ref")
     print(ref_words)
     print("hyp")
