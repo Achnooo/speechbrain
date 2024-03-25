@@ -78,7 +78,6 @@ class EncoderDecoderASR(Pretrained):
         """
         waveform = self.load_audio(path, **kwargs)
         # Fake a batch:
-        print("number 1")
         batch = waveform.unsqueeze(0)
         rel_length = torch.tensor([1.0])
         predicted_words, predicted_tokens = self.transcribe_batch(
@@ -161,7 +160,6 @@ class EncoderDecoderASR(Pretrained):
       wavs_q=self.quant(wavs)
       wav_lens_q=self.quant(wav_lens)
       """Runs full transcription - note: no gradients through decoding"""
-      print("HELLO")
       y_q,z_q=self.transcribe_batch(wavs_q, wav_lens_q)
       y=self.dequant(y_q)
       z=self.dequant(z_q)
