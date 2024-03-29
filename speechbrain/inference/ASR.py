@@ -140,7 +140,6 @@ class EncoderDecoderASR(Pretrained):
         tensor
             Each predicted token id.
         """
-        print("TRANSCRIBE BATCH")
         with torch.no_grad():
             wav_lens = wav_lens.to(self.device)
             encoder_out = self.encode_batch(wavs, wav_lens)
@@ -157,7 +156,6 @@ class EncoderDecoderASR(Pretrained):
 
     def forward(self, wavs, wav_lens):
         """Runs full transcription - note: no gradients through decoding"""
-        print("FORWARD FUNCTION")
         return self.transcribe_batch(wavs, wav_lens)
 
 
