@@ -259,7 +259,7 @@ class LSTM(torch.nn.Module):
                 x = x.reshape(x.shape[0], x.shape[1], x.shape[2] * x.shape[3])
 
         # Flatten params for data parallel
-        # self.rnn.flatten_parameters()
+        self.rnn.flatten_parameters()
 
         # Pack sequence for proper RNN handling of padding
         if lengths is not None:
