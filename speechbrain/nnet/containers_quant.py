@@ -186,6 +186,7 @@ class LengthsCapableSequential(Sequential):
         lengths : torch.Tensor
             The relative lengths of each signal in the tensor.
         """
+        print("hello")
         x=self.quant(x)
         import time
         for layer, give_lengths in zip(self.values(), self.takes_lengths):
@@ -202,6 +203,7 @@ class LengthsCapableSequential(Sequential):
         x=self.dequant(x)
         z=t2-t1
         quant_funcs.speed(z)
+        print("goodbye")
         return x
 
 
