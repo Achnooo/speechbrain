@@ -199,9 +199,9 @@ class LengthsCapableSequential(Sequential):
                 t2=time.time()
             else:
                 t1=time.time()
-                print("hello3")
+                print("hello3.1")
                 x = layer(x)
-                print("hello4")
+                print("hello4.1")
                 t2=time.time()
             if isinstance(x, tuple):
                 print("hello5")
