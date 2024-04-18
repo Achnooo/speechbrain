@@ -185,17 +185,15 @@ class LengthsCapableSequential(Sequential):
             The relative lengths of each signal in the tensor.
         """
         import time
+        t1=time.time()
         for layer, give_lengths in zip(self.values(), self.takes_lengths):
             if give_lengths:
-                t1=time.time()
                 x = layer(x, lengths=lengths)
-                t2=time.time()
             else:
-                t1=time.time()
                 x = layer(x)
-                t2=time.time()
             if isinstance(x, tuple):
                 x = x[0]
+        t2=time.time()
         z=t2-t1
         quant_funcs.speed(z)
         return x
