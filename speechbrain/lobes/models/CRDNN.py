@@ -181,6 +181,7 @@ class CRDNN(sb.nnet.containers.Sequential):
                     bidirectional=rnn_bidirectional,
                     re_init=rnn_re_init,
                 )
+                print("if this works i will be very happy crdnn 184")
 
         if dnn_blocks > 0:
             self.append(sb.nnet.containers.Sequential, layer_name="DNN")
@@ -192,6 +193,7 @@ class CRDNN(sb.nnet.containers.Sequential):
                 dropout=dropout,
                 layer_name=f"block_{block_index}",
             )
+            print("if this works i will be very happy crdnn 196")
 
 
 class CNN_Block(sb.nnet.containers.Sequential):
