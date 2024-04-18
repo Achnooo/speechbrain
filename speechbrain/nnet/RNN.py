@@ -1129,7 +1129,7 @@ class LiGRU(torch.nn.Module):
             h = h.reshape(h.shape[1] * 2, h.shape[0], self.hidden_size)
         else:
             h = h.transpose(0, 1)
-
+        print("if this works i will be very happy ligru")
         return x, h
 
 
