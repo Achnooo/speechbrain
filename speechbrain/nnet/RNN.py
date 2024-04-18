@@ -253,6 +253,7 @@ class LSTM(torch.nn.Module):
         lengths : torch.Tensor
             Relative length of the input signals.
         """
+        print("PLEASE BE THIS")
         # Reshaping input tensors for 4d inputs
         if self.reshape:
             if x.ndim == 4:
@@ -1097,7 +1098,6 @@ class LiGRU(torch.nn.Module):
         # run ligru
         output, hh = self._forward_ligru(x, hx=hx)
 
-        print("if this works i will be very happy")
 
         return output, hh
 
@@ -1129,7 +1129,6 @@ class LiGRU(torch.nn.Module):
             h = h.reshape(h.shape[1] * 2, h.shape[0], self.hidden_size)
         else:
             h = h.transpose(0, 1)
-        print("if this works i will be very happy ligru")
         return x, h
 
 

@@ -171,7 +171,6 @@ class CRDNN(sb.nnet.containers.Sequential):
                         combine_dims=True,
                     )
                     self.append(torch.nn.Dropout(p=dropout))
-                    print("if this works i will be very happy crdnn 174")
             else:
                 self.append(
                     rnn_class,
@@ -182,8 +181,6 @@ class CRDNN(sb.nnet.containers.Sequential):
                     bidirectional=rnn_bidirectional,
                     re_init=rnn_re_init,
                 )
-                print("if this works i will be very happy crdnn 184")
-        print("if this works i will be very happy crdnn 186")
         if dnn_blocks > 0:
             self.append(sb.nnet.containers.Sequential, layer_name="DNN")
         for block_index in range(dnn_blocks):
@@ -194,7 +191,6 @@ class CRDNN(sb.nnet.containers.Sequential):
                 dropout=dropout,
                 layer_name=f"block_{block_index}",
             )
-            print("if this works i will be very happy crdnn 196")
 
 
 class CNN_Block(sb.nnet.containers.Sequential):
