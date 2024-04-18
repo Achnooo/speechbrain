@@ -1097,6 +1097,8 @@ class LiGRU(torch.nn.Module):
         # run ligru
         output, hh = self._forward_ligru(x, hx=hx)
 
+        print("if this works i will be very happy")
+
         return output, hh
 
     def _forward_ligru(self, x, hx: Optional[Tensor]):
