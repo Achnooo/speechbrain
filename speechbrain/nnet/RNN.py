@@ -94,7 +94,6 @@ class RNN(torch.nn.Module):
 
     def __init__(
         self,
-        self.quant = torch.quantization.QuantStub()
         hidden_size,
         input_shape=None,
         input_size=None,
@@ -104,7 +103,6 @@ class RNN(torch.nn.Module):
         dropout=0.0,
         re_init=True,
         bidirectional=False,
-        self.dequant = torch.quantization.DeQuantStub()
     ):
         super().__init__()
         self.reshape = False
@@ -128,6 +126,9 @@ class RNN(torch.nn.Module):
             batch_first=True,
             nonlinearity=nonlinearity,
         )
+        self.quant = torch.quantization.QuantStub()
+        self.dequant = torch.quantization.DeQuantStub()
+
 
         if re_init:
             rnn_init(self.rnn)
