@@ -270,7 +270,9 @@ class LSTM(torch.nn.Module):
 
         # Support custom initial state
         if hx is not None:
+            hx = self.quant(hx)
             output, hn = self.rnn(x, hx=hx)
+            hx = self.dequant(hx)
         else:
             output, hn = self.rnn(x)
         x = self.dequant(x)
