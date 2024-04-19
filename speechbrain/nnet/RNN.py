@@ -126,8 +126,6 @@ class RNN(torch.nn.Module):
             batch_first=True,
             nonlinearity=nonlinearity,
         )
-        self.quant = torch.quantization.QuantStub()
-        self.dequant = torch.quantization.DeQuantStub()
 
 
         if re_init:
@@ -146,7 +144,6 @@ class RNN(torch.nn.Module):
             Relative lengths of the input signals.
         """
         # Reshaping input tensors for 4d inputs
-        x = self.quant(x)
         if self.reshape:
             if x.ndim == 4:
                 x = x.reshape(x.shape[0], x.shape[1], x.shape[2] * x.shape[3])
@@ -163,7 +160,6 @@ class RNN(torch.nn.Module):
             output, hn = self.rnn(x, hx=hx)
         else:
             output, hn = self.rnn(x)
-        x = self.dequant(x)
         # Unpack the packed sequence
         if lengths is not None:
             output = pad_packed_sequence(output)
@@ -241,7 +237,8 @@ class LSTM(torch.nn.Module):
             bias=bias,
             batch_first=True,
         )
-
+        self.quant = torch.quantization.QuantStub()
+        self.dequant = torch.quantization.DeQuantStub()
         if re_init:
             rnn_init(self.rnn)
 
@@ -258,6 +255,7 @@ class LSTM(torch.nn.Module):
             Relative length of the input signals.
         """
         print("PLEASE BE THIS")
+        x = self.quant(x)
         # Reshaping input tensors for 4d inputs
         if self.reshape:
             if x.ndim == 4:
@@ -275,7 +273,7 @@ class LSTM(torch.nn.Module):
             output, hn = self.rnn(x, hx=hx)
         else:
             output, hn = self.rnn(x)
-
+        x = self.dequant(x)
         # Unpack the packed sequence
         if lengths is not None:
             output = pad_packed_sequence(output)
