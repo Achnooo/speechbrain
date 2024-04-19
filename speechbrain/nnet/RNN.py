@@ -255,7 +255,6 @@ class LSTM(torch.nn.Module):
             Relative length of the input signals.
         """
         print("PLEASE BE THIS")
-        x = self.quant(x)
         # Reshaping input tensors for 4d inputs
         if self.reshape:
             if x.ndim == 4:
@@ -268,14 +267,15 @@ class LSTM(torch.nn.Module):
         if lengths is not None:
             x = pack_padded_sequence(x, lengths)
 
+        x=self.quant(x)
         # Support custom initial state
         if hx is not None:
-            hx = self.quant(hx)
             output, hn = self.rnn(x, hx=hx)
-            hx = self.dequant(hx)
         else:
             output, hn = self.rnn(x)
-        x = self.dequant(x)
+
+        output = self.dequant(output)
+        
         # Unpack the packed sequence
         if lengths is not None:
             output = pad_packed_sequence(output)
