@@ -254,7 +254,6 @@ class LSTM(torch.nn.Module):
         lengths : torch.Tensor
             Relative length of the input signals.
         """
-        print("PLEASE BE THIS")
         # Reshaping input tensors for 4d inputs
         if self.reshape:
             if x.ndim == 4:
