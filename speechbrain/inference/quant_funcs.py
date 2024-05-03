@@ -17,11 +17,11 @@ def run_speed_measurement(model,n,audio,my_text):
     numbers_from_file = [float(line.strip()) for line in lines]
     total_sum = sum(numbers_from_file)
     avg=total_sum/n
-    wer =wer(my_text,words)
+    err=wer(my_text,words)
     print("Transcription: ",words)
-    print("WER: ",wer)
+    print("WER: ",err)
     print("Avg: ", avg)
-    return (avg,wer)
+    return (avg,err)
 
 def delete_file_if_exists(filename):
     if os.path.exists(filename):
