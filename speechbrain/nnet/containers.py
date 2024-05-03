@@ -196,7 +196,6 @@ class LengthsCapableSequential(Sequential):
         t2=time.time()
         z=t2-t1
         quant_funcs.speed(z)
-        print("LCS")
         return x
 
 
