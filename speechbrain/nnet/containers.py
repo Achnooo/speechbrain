@@ -3,7 +3,7 @@
 Authors
  * Peter Plantinga 2020
 """
-
+from speechbrain.inference import quant_funcs
 import torch
 import inspect
 import logging
@@ -11,6 +11,7 @@ import operator
 import functools
 from speechbrain.nnet.linear import Linear
 from speechbrain.utils.callchains import lengths_arg_exists
+import time
 logger = logging.getLogger(__name__)
 
 
@@ -183,7 +184,7 @@ class LengthsCapableSequential(Sequential):
         lengths : torch.Tensor
             The relative lengths of each signal in the tensor.
         """
-        
+        t1=time.time()
         for layer, give_lengths in zip(self.values(), self.takes_lengths):
             if give_lengths:
                 x = layer(x, lengths=lengths)
@@ -191,7 +192,9 @@ class LengthsCapableSequential(Sequential):
                 x = layer(x)
             if isinstance(x, tuple):
                 x = x[0]
-        
+        t2=time.time()
+        z=t2-t1
+        quant_funcs.speed(z)
         return x
 
 

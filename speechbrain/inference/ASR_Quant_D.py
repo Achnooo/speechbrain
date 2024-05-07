@@ -13,7 +13,6 @@ Authors:
  * Adel Moumen 2023, 2024
  * Pradnya Kandarkar 2023
 """
-from speechbrain.inference import quant_funcs
 from dataclasses import dataclass
 from typing import Any, Optional, List
 import itertools
@@ -27,7 +26,6 @@ from speechbrain.utils.fetching import fetch
 from speechbrain.utils.data_utils import split_path
 from speechbrain.utils.dynamic_chunk_training import DynChunkTrainConfig
 from speechbrain.utils.streaming import split_fixed_chunks
-import time
 
 
 class EncoderDecoderASR(Pretrained):
@@ -112,11 +110,7 @@ class EncoderDecoderASR(Pretrained):
         """
         wavs = wavs.float()
         wavs, wav_lens = wavs.to(self.device), wav_lens.to(self.device)
-        t1=time.time()
         encoder_out = self.mods.encoder(wavs, wav_lens)
-        t2=time.time()
-        z=t2-t1
-        quant_funcs.speed(z)
         if self.transformer_beam_search:
             encoder_out = self.mods.transformer.encode(encoder_out, wav_lens)
         return encoder_out
