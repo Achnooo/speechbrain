@@ -11,7 +11,7 @@ import operator
 import functools
 from speechbrain.nnet.linear import Linear
 from speechbrain.utils.callchains import lengths_arg_exists
-
+import time
 logger = logging.getLogger(__name__)
 
 
@@ -184,7 +184,6 @@ class LengthsCapableSequential(Sequential):
         lengths : torch.Tensor
             The relative lengths of each signal in the tensor.
         """
-        import time
         t1=time.time()
         for layer, give_lengths in zip(self.values(), self.takes_lengths):
             if give_lengths:

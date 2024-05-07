@@ -18,6 +18,7 @@ from speechbrain.nnet.attention import (
 )
 from torch import Tensor
 from typing import Optional
+from torch.ao.quantization import QuantStub, DeQuantStub
 logger = logging.getLogger(__name__)
 
 
@@ -236,6 +237,8 @@ class LSTM(torch.nn.Module):
             bias=bias,
             batch_first=True,
         )
+        self.quant = torch.quantization.QuantStub()
+        self.dequant = torch.quantization.DeQuantStub()
         if re_init:
             rnn_init(self.rnn)
 
@@ -263,13 +266,14 @@ class LSTM(torch.nn.Module):
         if lengths is not None:
             x = pack_padded_sequence(x, lengths)
 
-   
+        x=self.quant(x)
         # Support custom initial state
         if hx is not None:
             output, hn = self.rnn(x, hx=hx)
         else:
             output, hn = self.rnn(x)
 
+        output = self.dequant(output)
         
         # Unpack the packed sequence
         if lengths is not None:
