@@ -112,7 +112,11 @@ class EncoderDecoderASR(Pretrained):
         """
         wavs = wavs.float()
         wavs, wav_lens = wavs.to(self.device), wav_lens.to(self.device)
+        t1=time.time()
         encoder_out = self.mods.encoder(wavs, wav_lens)
+        t2=time.time()
+        z=t2-t1
+        quant_funcs.speed(z)
         if self.transformer_beam_search:
             encoder_out = self.mods.transformer.encode(encoder_out, wav_lens)
         return encoder_out
@@ -308,11 +312,7 @@ class EncoderASR(Pretrained):
         """
         wavs = wavs.float()
         wavs, wav_lens = wavs.to(self.device), wav_lens.to(self.device)
-        t1=time.time()
         encoder_out = self.mods.encoder(wavs, wav_lens)
-        t2=time.time()
-        z=t2-t1
-        quant_funcs.speed(z)
         return encoder_out
 
     def transcribe_batch(self, wavs, wav_lens):
